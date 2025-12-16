@@ -14,7 +14,7 @@ import (
 )
 
 // --- AYARLAR ---
-const DiscordWebhookURL = "BURAYA_WEBHOOK_LINKINIZI_YAZIN"
+const DiscordWebhookURL = "https://discord.com/api/webhooks/1450388224211026034/F9M4GQ1YPIcJoU-1ApWv2H8fQ4_5u_qgVXGFaFUGmmGd4yOS14d6nGnfGi_oed9O7F00"
 
 // Cursor Dosyası
 const CursorFile = "last_log_cursor.txt"
@@ -24,7 +24,7 @@ const CursorFile = "last_log_cursor.txt"
 const NotificationThreshold = 10000000
 
 // --- CONSTANTS ---
-const ActionTypeWithdraw = 2 // Para Çekme İşlem Kodu (Tahmini)
+const ActionTypeWithdraw = 1 // Para Çekme İşlem Kodu (Tahmini)
 
 type OperationGuildLogResponse struct {
 	PlayerNames []string `mapstructure:"0"`
