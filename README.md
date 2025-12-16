@@ -1,9 +1,7 @@
-<!-- [![CircleCI](https://circleci.com/gh/broderickhyman/albiondata-client/tree/master.svg?style=svg)](https://circleci.com/gh/broderickhyman/albiondata-client/tree/master) [![Go Report Card](https://goreportcard.com/badge/github.com/broderickhyman/albiondata-client)](https://goreportcard.com/report/github.com/broderickhyman/albiondata-client)
--->
+🛡️ Albion Online Guild Bank Monitor (Custom Client)
+Bu proje, Albion Online lonca (guild) bankası hareketlerini ağ trafiği üzerinden dinleyerek, belirli bir limitin üzerindeki para çıkışlarını (Withdraw) tespit eder ve Discord üzerinden anlık bildirim gönderir.
 
-# Albion Data - Client
-Distributed client for the [Albion Online Data](https://www.albion-online-data.com/)
-project.
+Lonca ekonomisini korumak ve şüpheli işlemleri (RMT, hırsızlık vb.) anında fark etmek amacıyla geliştirilmiştir.
 
 A quick note on the legality of this application and if it
 violates the Terms and Conditions for Albion Online. Here is
@@ -22,89 +20,55 @@ This client monitors local network traffic, identifies UDP packets
 that contain relevant data for Albion Online, and ships the information
 off to a central NATS server that anyone can subscribe to.
 
-<!--
-[Client download stats](https://www.somsubhra.com/github-release-stats/?username=broderickhyman&repository=albiondata-client)
--->
+🔗 Atıf ve Teşekkür (Credits)
+Bu proje, harika bir açık kaynak projesi olan Albion Data Client altyapısı üzerine inşa edilmiştir.
 
-<!-- 
-### Contributing
-This process is run on a [DigitalOcean Droplet](https://www.digitalocean.com) in order to ensure almost perfect uptime and high performance for the users. If you find this project beneficial to you then please consider a donation, thanks!!
+Orijinal proje, Albion Online ağ paketlerini dinlemek ve ayrıştırmak (sniffing & parsing) için gerekli olan temel kütüphaneyi sağlar. Biz bu güçlü altyapıyı kullanarak, özellikle Guild Log paketlerine odaklanan ve bunları Discord Webhook ile entegre eden özelleştirilmiş bir versiyon geliştirdik.
 
--->
+Orijinal projeye buradan ulaşabilirsiniz: github.com/ao-data/albiondata-client
 
-# Contributions
-Many thanks to the original developers:
-- [Regner](https://github.com/Regner)
-- [pcdummy](https://github.com/pcdummy)
-- [Ultraporing](https://github.com/Ultraporing)
+🚀 Özellikler
+Paket Analizi: Oyunun ağ trafiğini dinler ve Guild işlem loglarını yakalar.
 
+Akıllı Filtreleme: Sadece "Para Çekme" (Withdraw) işlemlerini filtreler.
 
-Many thanks also to [broderickhyman](https://github.com/broderickhyman) for picking up development and funding for the the last few years of the project!
+Eşik Değeri (Threshold): Belirlenen miktar (örneğin 10 Milyon Silver) üzerindeki işlemler için alarm üretir.
 
-As of 2023-01-01, [Stanx](https://github.com/phendryx) is the primary maintainer and provides funding of the related projects.  
+Discord Entegrasyonu: Şüpheli işlemleri detaylı (Oyuncu adı, Miktar, Tarih) bir şekilde Discord kanalına raporlar.
 
-[Walkynn](https://github.com/walkeralencar) has been a long time maintainer of different aspets of the project as well.
+Deduplication: Aynı logun tekrar tekrar gönderilmesini önlemek için son işlenen log zamanını (cursor) kaydeder.
 
-# Downloads
-Downloads can be found here: https://github.com/ao-data/albiondata-client/releases
+🛠️ Kurulum ve Gereksinimler
+Ön Hazırlık
+Bu yazılımın çalışabilmesi için bilgisayarınızda ağ paketlerini yakalayacak bir sürücüye ihtiyaç vardır:
 
-Stats for the client releases can be viewed [here](https://tooomm.github.io/github-release-stats/?username=ao-data&repository=albiondata-client).
-## Running on Mac
+Windows: Npcap (Kurarken "Install Npcap in WinPcap API-compatible Mode" seçeneğini işaretleyin).
 
-### Running from the Finder
-1. Download the latest `albiondata-client-amd64-mac.zip` file from [the Releases page](https://github.com/ao-data/albiondata-client/releases)
-2. Unzip that file from the Finder
-3. Enter the `albiondata-client` folder.
-4. Double click the `run.command` file. It will ask for your password for permissions reasons.
+Linux/macOS: libpcap kütüphanesi.
 
-### Running from the Terminal
-1. Download the latest `update-darwin-amd64.gz` file from [the Releases page](https://github.com/ao-data/albiondata-client/releases)
-2. Unzip that file from the Finder or with `gunzip update-darwin-amd64.gz`
-3. The unzipped `albiondata-client` file is a Golang binary file. You'll need to make this file executable so it can be run directly. You can do this from your Terminal with: `chmod +x albiondata-client`
-4. Run the client from your Terminal with `./albiondata-client`
+Derleme (Build)
+Projeyi bilgisayarınıza klonlayın ve proje dizininde şu komutu çalıştırın:
 
-## Running on Debian or Debian based distros
+Bash
 
-### Install app binary
-<sup>`~/.local/bin` requires systemd. If you don't roll with systemd use something else. </sup>
+go build -o guild-monitor.exe
+⚙️ Yapılandırma
+Kod içerisindeki client paketinde bulunan ayarları kendi sunucunuza göre düzenlemelisiniz:
 
-1. Create ~/.local/bin folder: `mkdir -p ~/.local/bin`
-2. Download latest `update-linux-amd64.gz` version from [the Releases page](https://github.com/ao-data/albiondata-client/releases)  
-`curl -L https://github.com/ao-data/albiondata-client/releases/latest/download/update-linux-amd64.gz -o - | gzip -d > ~/.local/bin/albiondata-client`
-3. Give user execution permission: `chmod u+x ~/.local/bin/albiondata-client`
+Go
 
-### Install dependency libpcap
+// Discord Webhook URL'nizi buraya girin
+const DiscordWebhookURL = "https://discord.com/api/webhooks/..."
 
-```bash
-sudo apt install libpcap-dev
-```
+// Bildirim için alt limit (Örn: 10 Milyon Silver)
+// Negatif değer girilmelidir (Para çıkışı olduğu için)
+const NotificationThreshold = -10000000 
+📸 Ekran Görüntüleri / Örnek Çıktı
+Discord Bildirimi:
 
-### Give binary permission to capture network traffic
+🚨 ALARM: BANKADAN YÜKSEK MİKTAR ÇEKİLDİ (10M+) 🚨
 
-To allow binary to capture data without using sudo
+👤 Oyuncu: XxPlayerOne 💸 Çekilen Miktar: 15.000.000 Silver 📅 İşlem Zamanı: 16.12.2025 14:30:00 ⚠️ Aksiyon: Lütfen bu çekimin sebebini oyuncuya sorunuz.
 
-```bash
-sudo setcap cap_net_raw,cap_net_admin=eip ~/.local/bin/albiondata-client
-```
-
-# Related Projects
-- [albiondata-deduper-dotNet](https://github.com/ao-data/albiondata-deduper-dotNet)
-- [albiondata-sql-dotNet](https://github.com/ao-data/albiondata-sql-dotNet)
-- [albiondata-api-dotNet](https://github.com/ao-data/albiondata-api-dotNet)
-- [AlbionData.Models](https://github.com/ao-data/albiondata-models-dotNet) [![NuGet](https://img.shields.io/nuget/v/AlbionData.Models.svg)](https://www.nuget.org/packages/AlbionData.Models/)
-- [albion-data-website](https://github.com/ao-data/albion-data-website)
-
-# Contact Us
-The best way to get in touch with us is on the Albion Online Fansites Discord server in either the #proj-albiondata or the #developers channel. A permanent invite link can be found here: [https://discord.gg/TjWdq24](https://discord.gg/TjWdq24)
-
-# Developer Setup
-### Mac/Linux Setup
-- Install go
-- Build the project (Go modules will download automatically)
-
-### Windows Setup
-[Windows Setup Guide](https://github.com/ao-data/albiondata-client/wiki/Building-in-Windows)
-
-# License
-This project, and all contributed code, are licensed under the MIT
-License. A copy of the MIT License may be found in the repository.
+⚠️ Yasal Uyarı (Disclaimer)
+Bu yazılım "Olduğu Gibi" (As Is) sunulmaktadır. Albion Online Kullanım Şartları (TOS), oyun trafiğinin dinlenmesi konusunda katı kurallara sahip olabilir. Bu yazılım herhangi bir oyun verisini değiştirmez (read-only), ancak kullanımı tamamen kullanıcının sorumluluğundadır.
