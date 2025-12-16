@@ -21,7 +21,7 @@ const CursorFile = "last_log_cursor.txt"
 
 // Bildirim Eşiği (Örn: 10 Milyon Silver)
 // Şu an test için 10.000.000 olarak ayarlı.
-const NotificationThreshold = 10000000
+const NotificationThreshold = 10000001
 
 // --- CONSTANTS ---
 const ActionTypeWithdraw = 1 // Para Çekme İşlem Kodu (Tahmini)
