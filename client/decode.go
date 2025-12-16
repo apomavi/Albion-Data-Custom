@@ -73,6 +73,10 @@ func decodeResponse(params map[uint8]interface{}) (operation operation, err erro
 		operation = &operationRealEstateGetAuctionDataResponse{}
 	case opRealEstateBidOnAuction:
 		operation = &operationRealEstateBidOnAuctionResponse{}
+		// decodeResponse fonksiyonunun içindeki switch'e ekle:
+
+	case 153: // Guild Ledger (Loglar) OpCode'u
+		operation = &OperationGuildLogResponse{}
 	default:
 		return nil, nil
 	}
