@@ -14,17 +14,17 @@ import (
 )
 
 // --- AYARLAR ---
-const DiscordWebhookURL = "https://discord.com/api/webhooks/1450388224211026034/F9M4GQ1YPIcJoU-1ApWv2H8fQ4_5u_qgVXGFaFUGmmGd4yOS14d6nGnfGi_oed9O7F00"
+const DiscordWebhookURL = "https://discord.com/api/webhooks/1450451917913198705/T_afMhSIecGKQPLSUYux1oM0f9z3gvtqs-LS5hTX6y_3qbg3rT0MQwZcDBAcAANYMISm"
 
 // Cursor Dosyası
 const CursorFile = "last_log_cursor.txt"
 
 // Bildirim Eşiği (Örn: 10 Milyon Silver)
 // Şu an test için 10.000.000 olarak ayarlı.
-const NotificationThreshold = 10000001
+const NotificationThreshold = -10000001
 
 // --- CONSTANTS ---
-const ActionTypeWithdraw = 1 // Para Çekme İşlem Kodu (Tahmini)
+const ActionTypeWithdraw = 3 // Para Çekme İşlem Kodu (Tahmini)
 
 type OperationGuildLogResponse struct {
 	PlayerNames []string `mapstructure:"0"`
@@ -72,7 +72,7 @@ func (op OperationGuildLogResponse) Process(state *albionState) {
 		// --- FİLTRELEME (BURASI DEĞİŞTİ) ---
 		// 1. İşlem Tipi 2 mi? (Para Çekme)
 		// 2. Miktar Eşik değerinden büyük mü?
-		if actionType == ActionTypeWithdraw && realAmount >= NotificationThreshold {
+		if actionType == ActionTypeWithdraw && realAmount <= NotificationThreshold {
 
 			log.Infof("⚠️ ŞÜPHELİ İŞLEM: %s - %s Silver", playerName, formatWithDots(realAmount))
 

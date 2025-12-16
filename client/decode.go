@@ -77,7 +77,9 @@ func decodeResponse(params map[uint8]interface{}) (operation operation, err erro
 
 	case 153: // Guild Ledger (Loglar) OpCode'u
 		operation = &OperationGuildLogResponse{}
+
 	default:
+		//log.Infof(">>> YAKALANAN GİZLİ PAKET (Response) - OpCode: %d | Params: %+v", code, params)
 		return nil, nil
 	}
 
