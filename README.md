@@ -66,7 +66,8 @@ const NotificationThreshold = -10000000
 📸 Ekran Görüntüleri / Örnek Çıktı
 Discord Bildirimi:
 
-<img width="1907" height="908" alt="guildbank" src="https://github.com/user-attachments/assets/ae7d2f6c-5bca-4fda-84c2-ab38ba7e7749" />
+
+<img width="1919" height="989" alt="ss" src="https://github.com/user-attachments/assets/475d72f7-cd50-491c-8826-e2967905be17" />
 
 
 
