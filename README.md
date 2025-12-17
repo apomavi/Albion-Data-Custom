@@ -66,8 +66,9 @@ const NotificationThreshold = -10000000
 📸 Ekran Görüntüleri / Örnek Çıktı
 Discord Bildirimi:
 
+<img width="1292" height="882" alt="sss" src="https://github.com/user-attachments/assets/c5ebcca5-a963-40c5-a924-512f8562aeae" />
 
-<img width="1919" height="989" alt="ss" src="https://github.com/user-attachments/assets/475d72f7-cd50-491c-8826-e2967905be17" />
+
 
 
 
