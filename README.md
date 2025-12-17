@@ -66,9 +66,11 @@ const NotificationThreshold = -10000000
 📸 Ekran Görüntüleri / Örnek Çıktı
 Discord Bildirimi:
 
-🚨 ALARM: BANKADAN YÜKSEK MİKTAR ÇEKİLDİ (10M+) 🚨
+<img width="1907" height="908" alt="guildbank" src="https://github.com/user-attachments/assets/ae7d2f6c-5bca-4fda-84c2-ab38ba7e7749" />
 
-👤 Oyuncu: XxPlayerOne 💸 Çekilen Miktar: 15.000.000 Silver 📅 İşlem Zamanı: 16.12.2025 14:30:00 ⚠️ Aksiyon: Lütfen bu çekimin sebebini oyuncuya sorunuz.
+
+
+
 
 ⚠️ Yasal Uyarı (Disclaimer)
 Bu yazılım "Olduğu Gibi" (As Is) sunulmaktadır. Albion Online Kullanım Şartları (TOS), oyun trafiğinin dinlenmesi konusunda katı kurallara sahip olabilir. Bu yazılım herhangi bir oyun verisini değiştirmez (read-only), ancak kullanımı tamamen kullanıcının sorumluluğundadır.
