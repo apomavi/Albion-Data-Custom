@@ -49,13 +49,12 @@ Linux/macOS: libpcap kütüphanesi.
 Derleme (Build)
 Projeyi bilgisayarınıza klonlayın ve proje dizininde şu komutu çalıştırın:
 
-Bash
 
-go build -o guild-monitor.exe
+
 ⚙️ Yapılandırma
 Kod içerisindeki client paketinde bulunan ayarları kendi sunucunuza göre düzenlemelisiniz:
-
-Go
+**
+To post to a specific Discord channel, create a webhook in that channel's editor and paste the link here: client/operation_guild_log.go ----> const DiscordWebhookURL = "Link_in_here"**
 
 // Discord Webhook URL'nizi buraya girin
 const DiscordWebhookURL = "https://discord.com/api/webhooks/..."
